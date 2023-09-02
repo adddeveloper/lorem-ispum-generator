@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lorem Ispum Generator</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            background-color: #e0d0b3;
+            font-family: 'Trebuchet MS', serif;
+            margin: 0;
+            padding: 0;
+        }
+    
+        .generator {
+            background-color: #fff;
+            border: 1px solid #a09070;
+            margin: 20px auto;
+            max-width: 800px;
+            padding: 20px;
+            text-align: center;
+        }
+    
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+    
+        label {
+            display: block;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    
+        input[type="number"] {
+            font-size: 16px;
+            padding: 5px;
+            width: 50px;
+        }
+    
+        button {
+            background-color: #a09070;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 10px 20px;
+        }
+    
+        button:hover {
+            background-color: #7d5a3d;
+        }
+    
+        #output {
+            margin-top: 20px;
+            text-align: left;
+        }
+    
+        .description {
+            background-color: #e0d0b3;
+            border: 1px solid #a09070;
+            margin-top: 20px;
+            padding: 20px;
+        }
+    
+        h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+    
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        /* Add this style to your existing <style> block */
+    /* Styling the scrollbar track and thumb */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background-color: #a09070;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background-color: #7d5a3d;
+        border-radius: 5px;
+    }
+    
+    /* Styling the scrollbar buttons (up and down arrows) */
+    ::-webkit-scrollbar-button {
+        display: none;
+    }
+    
+    /* Styling the scrollbar corner */
+    ::-webkit-scrollbar-corner {
+        background-color: #a09070;
+    }
+    
+    /* Styling the scrollbar thumb when being hovered */
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #5a3c1d;
+    }
+    
+    </style>
+</head>
+<body>
+    <div class="generator">
+        <h1>Lorem Ipsum Generator</h1>
+        <div class="description">
+            <h2>About Lorem Ipsum</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla auctor turpis a tortor tincidunt, a
+                eleifend nunc elementum.
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has been the industry's
+                standard dummy text ever since the 1500s,
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            </p>
+            <p>
+                It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
+                Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more
+                obscure Latin words,
+                consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical
+                literature, discovered the undoubtable source.
+            </p>
+        </div>
+        <div>
+            <div style="display: flex;justify-content: center;align-items: center;margin: 1rem;">
+                <div style="margin: 0 1rem;">
+                    <label for="paragraphs">Number of Paragraphs:</label>
+                    <input type="number" id="paragraphs" value="1" min="1">
+                </div>
+                <div style="margin: 0 1rem;">
+                    <label for="sentences">Sentences per Paragraph:</label>
+                    <input type="number" id="sentences" value="5" min="1">
+                </div>
+                
+            </div>
+            <button id="generate">Generate Lorem Ipsum</button>
+            <div id="output"></div>
+        </div>
+    </div>
+
+    <script>
+        const initialSentence = "Lorem ipsum dolor sit amet.";
+
+        const getRandomSentence = () => {
+            const sentences = [
+                "Consectetur adipiscing elit.",
+                "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "Ut enim ad minim veniam.",
+                "Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            ];
+            const randomIndex = Math.floor(Math.random() * sentences.length);
+            return sentences[randomIndex];
+        };
+
+        document.getElementById("generate").addEventListener("click", function () {
+            const outputDiv = document.getElementById("output");
+            const paragraphsInput = document.getElementById("paragraphs");
+            const sentencesInput = document.getElementById("sentences");
+            const numParagraphs = parseInt(paragraphsInput.value, 10);
+            const numSentences = parseInt(sentencesInput.value, 10);
+
+            let output = "";
+            for (let i = 0; i < numParagraphs; i++) {
+                if(i == 0){
+                    let paragraph = "<p>" + initialSentence;
+                    for (let j = 0; j < numSentences; j++) {
+                        paragraph += " " + getRandomSentence();
+                    }
+                    paragraph += "</p>";
+                    output += paragraph;
+                } else {
+                    let paragraph = "<p>";
+                    for (let j = 0; j < numSentences; j++) {
+                        paragraph += " " + getRandomSentence();
+                    }
+                    paragraph += "</p>";
+                    output += paragraph;
+                }
+            }
+
+            outputDiv.innerHTML = output;
+        });
+    </script>
+</body>
+</html>
